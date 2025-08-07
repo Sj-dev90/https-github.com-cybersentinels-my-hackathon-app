@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Language Translator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(102, 126, 234, 0.95);
+            transition: all 0.3s ease;
+        }
+        
+        .content-spacing {
+            padding-top: 80px;
+        }
+        
+        .translator-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .loading-spinner {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .example-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 4px;
+        }
+        
+        .example-chip:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media print {
+            .fixed-header {
+                position: static !important;
+                backdrop-filter: none;
+                background: #667eea;
+            }
+            .content-spacing {
+                padding-top: 0;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="fixed-header">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-white">
+                    <i class="fas fa-language mr-2"></i>
+                    Creative Language Translator
+                </h1>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#about" class="text-white hover:text-gray-200 transition-colors">About</a>
+                    <a href="#demo" class="text-white hover:text-gray-200 transition-colors">Demo</a>
+                    <a href="#features" class="text-white hover:text-gray-200 transition-colors">Features</a>
+                    <a href="#why-use" class="text-white hover:text-gray-200 transition-colors">Why Use</a>
+                    <a href="#faq" class="text-white hover:text-gray-200 transition-colors">FAQ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="gradient-bg text-white content-spacing">
+        <div class="container mx-auto px-6 py-20 text-center">
+            <div class="fade-in">
+                <h2 class="text-5xl font-bold mb-6">AI-Powered Creative Translation</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">
+                    Beyond literal translation - preserve meaning, tone, and style while converting text between languages or transforming writing styles with advanced AI technology.
+                </p>
+                <a href="#demo" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                    Try Demo Now <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold gradient-text mb-4">About Creative Language Translator</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                    Our Creative Language Translator represents a breakthrough in AI-powered communication technology. Unlike traditional translation tools that focus solely on literal conversion, our system understands and preserves the nuanced elements that make language truly expressive - tone, style, cultural context, and creative intent.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <i class="fas fa-brain text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">AI Intelligence</h3>
+                    <p class="text-gray-600">Advanced neural networks understand context, tone, and cultural nuances for accurate translations.</p>
+                </div>
+                
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <i class="fas fa-palette text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Style Preservation</h3>
+                    <p class="text-gray-600">Maintains original writing style, voice, and artistic intent across different languages and formats.</p>
+                </div>
+                
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <i class="fas fa-magic text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Creative Adaptation</h3>
+                    <p class="text-gray-600">Transform content between different creative formats while preserving core meaning and impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Try Our Translator</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Experience the power of creative translation. Test different modes including language translation, style transformation, and creative rephrasing.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto translator-box p-8">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Translation Mode</label>
+                    <select id="translationMode" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="language">Language Translation</option>
+                        <option value="style">Style Transformation</option>
+                        <option value="creative">Creative Rephrasing</option>
+                    </select>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">From</label>
+                        <select id="sourceOption" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            <option value="english">English</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">To</label>
+                        <select id="targetOption" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            <option value="spanish">Spanish</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Try these examples:</label>
+                    <div id="exampleChips">
+                        <span class="example-chip" onclick="setExample('Hello, how are you today?')">Simple Greeting</span>
+                        <span class="example-chip" onclick="setExample('The meeting is scheduled for tomorrow at 3 PM.')">Business Text</span>
+                        <span class="example-chip" onclick="setExample('The sunset painted the sky in brilliant shades of orange and pink.')">Descriptive Text</span>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Input Text</label>
+                        <textarea id="inputText" 
+                                  placeholder="Enter text to translate or transform..." 
+                                  class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Translated Text</label>
+                        <div class="relative">
+                            <textarea id="outputText" 
+                                      placeholder="Translation will appear here..." 
+                                      class="w-full h-32 p-4 border border-gray-300 rounded-lg bg-gray-50 resize-none" 
+                                      readonly></textarea>
+                            <div id="loadingIndicator" class="absolute top-4 right-4 hidden">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center items-center mt-6">
+                    <button id="transformButton" class="flex items-center px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-semibold transition-colors text-lg">
+                        <i class="fas fa-magic mr-3"></i>
+                        Transform Text
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Core Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive translation capabilities that go beyond simple word conversion to preserve the essence of communication.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-hover bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl">
+                    <i class="fas fa-globe-americas text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Multi-Language Translation</h3>
+                    <p class="text-gray-600 mb-4">Seamlessly translate between major world languages including English, Spanish, French, German, and more, while preserving the original tone and context.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Support for 50+ languages</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Context-aware translation</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cultural nuance preservation</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-r from-purple-50 to-pink-50 p-8 rounded-xl">
+                    <i class="fas fa-pen-fancy text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Style Transformation</h3>
+                    <p class="text-gray-600 mb-4">Transform writing styles while maintaining meaning - convert formal to casual, modern to Shakespearean, or technical to conversational.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Formal ↔ Casual conversion</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Historical style adaptation</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Tone adjustment capabilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Advanced Capabilities</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Cutting-edge features that push the boundaries of creative translation and content transformation.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <i class="fas fa-music text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Creative Rephrasing</h3>
+                    <p class="text-gray-600 mb-4">Transform ordinary text into poetry, song lyrics, or other creative formats while preserving the core message and emotional impact.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600">
+                        <strong>Example:</strong><br>
+                        <em>Input:</em> "I love watching the sunrise"<br>
+                        <em>Poetry:</em> "Dawn's golden embrace fills my soul with wonder"
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <i class="fas fa-comments text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Idiomatic Translation</h3>
+                    <p class="text-gray-600 mb-4">Handle idioms, slang, and colloquialisms with sophisticated understanding to produce natural, culturally appropriate translations.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600">
+                        <strong>Example:</strong><br>
+                        <em>English:</em> "It's raining cats and dogs"<br>
+                        <em>Spanish:</em> "Está lloviendo a cántaros"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-use" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Why Choose Our Translator?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Discover the advantages that set our Creative Language Translator apart from traditional translation tools.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center card-hover p-6">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Accuracy & Reliability</h3>
+                    <p class="text-gray-600">Advanced AI algorithms ensure precise translation while maintaining contextual accuracy and cultural sensitivity.</p>
+                </div>
+                
+                <div class="text-center card-hover p-6">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Speed & Efficiency</h3>
+                    <p class="text-gray-600">Real-time translation capabilities that deliver results instantly, perfect for professional and personal use.</p>
+                </div>
+                
+                <div class="text-center card-hover p-6">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Versatile Applications</h3>
+                    <p class="text-gray-600">Ideal for writers, marketers, educators, and international businesses requiring nuanced communication.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-xl">
+                <h3 class="text-2xl font-bold text-center mb-6">Perfect For:</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <i class="fas fa-building text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-semibold">Businesses</h4>
+                        <p class="text-sm text-gray-600">International communication</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-graduation-cap text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-semibold">Educators</h4>
+                        <p class="text-sm text-gray-600">Language learning tools</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-feather text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-semibold">Writers</h4>
+                        <p class="text-sm text-gray-600">Creative content adaptation</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-heart text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-semibold">Personal Use</h4>
+                        <p class="text-sm text-gray-600">Cross-cultural communication</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Get answers to common questions about our Creative Language Translator.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(0)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">How does the Creative Language Translator preserve tone and style?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        Our AI system analyzes contextual elements, sentence structure, vocabulary choices, and cultural nuances to understand the original tone and style. It then applies sophisticated algorithms to maintain these characteristics in the target language or style, ensuring the translated content feels natural and preserves the author's voice.
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(1)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">What languages and styles are supported?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-1"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        We support major world languages including English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, and more. For style transformation, options include formal/casual, modern/classical, technical/conversational, and creative formats like poetry, prose, and song lyrics. The system continuously learns and expands its capabilities.
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(2)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">How accurate are the translations compared to traditional tools?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-2"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        Our Creative Language Translator achieves superior accuracy by understanding context, cultural nuances, and stylistic elements that traditional tools often miss. While traditional translators focus on literal word conversion, our system comprehends the intended meaning and emotional tone, resulting in more natural and accurate translations.
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(3)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">Can it handle idioms and colloquial expressions?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-3"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        Yes, our advanced AI is specifically trained to recognize and translate idioms, slang, and colloquialisms. Instead of literal translation, it finds culturally equivalent expressions in the target language that convey the same meaning and emotional impact, ensuring natural-sounding results.
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(4)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">Is there a limit to the length of text I can translate?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-4"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        The system can handle various text lengths, from short phrases to lengthy documents. For optimal performance and accuracy, we recommend processing texts in segments of up to 5,000 characters. Longer documents can be processed in batches while maintaining consistency in style and tone throughout.
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFaq(5)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold">How does creative rephrasing work?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200" id="icon-5"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-600">
+                        Creative rephrasing uses advanced natural language processing to understand the core message and emotional content of your text, then reconstructs it in the desired creative format. Whether converting to poetry, song lyrics, or other artistic forms, the system maintains the essential meaning while adapting structure, rhythm, and style to match the target format.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4">
+                    <i class="fas fa-language mr-2"></i>
+                    Creative Language Translator
+                </h3>
+                <p class="text-gray-200 max-w-2xl mx-auto">
+                    Revolutionizing communication through AI-powered creative translation that preserves meaning, tone, and style across languages and formats.
+                </p>
+            </div>
+            
+            <div class="border-t border-purple-400 pt-8">
+                <p class="text-gray-200">
+                    © 2024 Creative Language Translator. Advanced AI Translation Technology.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+   <script>
+    // --- DOM Element References ---
+    const transformBtn = document.getElementById('transformButton');
+    const inputTextElem = document.getElementById('inputText');
+    const outputTextElem = document.getElementById('outputText');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const styleSelect = document.getElementById('translationMode'); // This is the dropdown for style
+    const sourceSelect = document.getElementById('sourceOption');
+    const targetSelect = document.getElementById('targetOption');
+
+    // --- Core Function to Call the Backend API ---
+    async function getTransformation() {
+        const inputText = inputTextElem.value.trim();
+        const styleChoice = getStyleChoice(); // Get the currently selected style
+
+        if (!inputText) {
+            alert("Please enter some text to transform!");
+            return;
+        }
+
+        // Show loading indicators
+        loadingIndicator.classList.remove('hidden');
+        outputTextElem.value = 'AI is thinking...';
+        transformBtn.disabled = true;
+
+        try {
+            // Send a request to our Flask backend
+            const response = await fetch('http://127.0.0.1:5000/transform', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: inputText,
+                    style: styleChoice
+                }),
+            });
+
+            if (!response.ok) {
+                // Handle server errors
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            outputTextElem.value = data.transformed_text; // Display the result from the AI
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            outputTextElem.value = `Error: ${error.message}`;
+        } finally {
+            // Hide loading indicators and re-enable button
+            loadingIndicator.classList.add('hidden');
+            transformBtn.disabled = false;
+        }
+    }
+    
+    // --- Helper function to determine the style based on the mode ---
+    function getStyleChoice() {
+        const mode = styleSelect.value;
+        let from = sourceSelect.value;
+        let to = targetSelect.value;
+
+        if (mode === 'language') {
+            return `Translate from ${from} to ${to}`;
+        } else if (mode === 'style') {
+            return `Transform style from ${from} to ${to}`;
+        } else if (mode === 'creative') {
+            return `Rephrase from ${from} to ${to}`;
+        }
+        return 'general transformation'; // Fallback
+    }
+
+
+    // --- Event Listener for the button ---
+    transformBtn.addEventListener('click', getTransformation);
+
+
+    // --- Keep your existing functions for the UI (FAQ, examples, mode options) ---
+    // (The following functions are from your original file and should be kept)
+    const examples = {
+        language: [
+            { text: 'Hello, how are you today?', label: 'Simple Greeting' },
+            { text: 'The meeting is scheduled for tomorrow at 3 PM.', label: 'Business Text' },
+            { text: 'The sunset painted the sky in brilliant shades of orange and pink.', label: 'Descriptive Text' }
+        ],
+        style: [
+            { text: 'I would like to request your assistance with this matter.', label: 'Formal Text' },
+            { text: 'Hey, what\'s up?', label: 'Casual Text' },
+            { text: 'Hello, how are you today?', label: 'Modern Text' }
+        ],
+        creative: [
+            { text: 'I love watching the sunrise', label: 'Simple Statement' },
+            { text: 'The cat sat on the mat', label: 'Basic Sentence' },
+            { text: 'The ocean waves are powerful', label: 'Nature Description' }
+        ]
+    };
+
+    function updateModeOptions() {
+        const mode = document.getElementById('translationMode').value;
+        const sourceSelect = document.getElementById('sourceOption');
+        const targetSelect = document.getElementById('targetOption');
+        const exampleChips = document.getElementById('exampleChips');
+
+        sourceSelect.innerHTML = '';
+        targetSelect.innerHTML = '';
+
+        if (mode === 'language') {
+            sourceSelect.innerHTML = `
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Tamil">Tamil</option>
+            `;
+            targetSelect.innerHTML = `
+                <option value="Spanish">Spanish</option>
+                <option value="English">English</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Tamil">Tamil</option>
+            `;
+        } else if (mode === 'style') {
+            sourceSelect.innerHTML = `
+                <option value="Formal">Formal</option>
+                <option value="Casual">Casual</option>
+                <option value="Modern">Modern</option>
+                <option value="Technical">Technical</option>
+            `;
+            targetSelect.innerHTML = `
+                <option value="Casual">Casual</option>
+                <option value="Formal">Formal</option>
+                <option value="Shakespearean">Shakespearean</option>
+                <option value="Poetic">Poetic</option>
+                <option value="Gen-Z Slang">Gen-Z Slang</option>
+                <option value="Simple (ELI5)">Simple (Explain Like I'm 5)</option>
+            `;
+        } else if (mode === 'creative') {
+            sourceSelect.innerHTML = `<option value="prose">Prose</option>`;
+            targetSelect.innerHTML = `<option value="poetry">Poetry</option><option value="song">Song Lyrics</option>`;
+        }
+
+        exampleChips.innerHTML = '';
+        examples[mode].forEach(example => {
+            const chip = document.createElement('span');
+            chip.className = 'example-chip';
+            chip.textContent = example.label;
+            chip.onclick = () => setExample(example.text);
+            exampleChips.appendChild(chip);
+        });
+    }
+
+    function setExample(text) {
+        document.getElementById('inputText').value = text;
+    }
+
+    function toggleFaq(index) {
+        const answer = document.querySelectorAll('.faq-answer')[index];
+        const icon = document.getElementById(`icon-${index}`);
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('translationMode').addEventListener('change', updateModeOptions);
+        updateModeOptions();
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
