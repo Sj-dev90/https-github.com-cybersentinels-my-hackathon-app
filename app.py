@@ -68,5 +68,4 @@ def transform_text():
 
 # --- RUN THE FLASK APP ---
 if __name__ == '__main__':
-    # Runs the server on http://127.0.0.1:5000
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
