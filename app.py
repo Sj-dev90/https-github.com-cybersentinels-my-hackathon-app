@@ -10,7 +10,7 @@ load_dotenv()
 # --- INITIALIZE FLASK APP AND CORS ---
 app = Flask(__name__)
 # This allows your HTML file to make requests to this server
-CORS(app) 
+CORS(app, origins=["https://creativetranslator.netlify.app"])
 
 # --- CONFIGURE GEMINI API ---
 try:
